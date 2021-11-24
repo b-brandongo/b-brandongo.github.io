@@ -144,6 +144,9 @@
 
     </b-container>
 
+    <div>
+      <apexchart type="bar" height="350" :options="chartOptions" :series="series"></apexchart>
+    </div>
   </div>
 </template>
 

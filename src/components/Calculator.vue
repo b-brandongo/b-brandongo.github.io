@@ -5,7 +5,7 @@
     <b-container>
       <b-row>
         <b-col sm="4">
-          <label :for="sensitivityPercent">{{ $t('sensitivityPercent') }}</label>
+          <b-link href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" :for="sensitivityPercent">{{ $t('sensitivityPercent') }}</b-link>
         </b-col>
         <b-col>
           <b-form-input v-model="sensitivityPercent" placeholder="sensitivity" min='0' max='100' type="number"
@@ -18,7 +18,7 @@
 
       <b-row>
         <b-col sm="4">
-          <label :for="specificityPercent">{{ $t('specificityPercent') }}</label>
+          <b-link href="https://en.wikipedia.org/wiki/Sensitivity_and_specificity" :for="specificityPercent">{{ $t('specificityPercent') }}</b-link>
         </b-col>
         <b-col>
           <b-form-input v-model="specificityPercent" placeholder="specificity" min='0' max='100' type="number"
@@ -73,17 +73,27 @@
 
       <b-row>
         <b-col>
-          {{ $t('accuracy') }} {{ accuracy.times(100).toPrecision(4) }} %
+          <b-link href="https://en.wikipedia.org/wiki/Accuracy">{{ $t('accuracy') }}</b-link> {{ accuracy.times(100).toPrecision(4) }} %
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          {{ $t('precision') }} {{ precision.times(100).toPrecision(4) }} %
+          <b-link href="https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values">{{ $t('precision') }}</b-link> {{ precision.times(100).toPrecision(4) }} %
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          {{ $t('NPV') }} {{ npv.times(100).toPrecision(4) }} %
+          <b-link href="https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values">{{ $t('NPV') }}</b-link> {{ npv.times(100).toPrecision(4) }} %
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-link href="https://en.wikipedia.org/wiki/False_discovery_rate">{{ $t('falseDiscoveryRate') }}</b-link> {{ falseDiscoveryRate.times(100).toPrecision(3) }} %
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          <b-link href="https://en.wikipedia.org/wiki/Positive_and_negative_predictive_values#false_omission_rate">{{ $t('falseOmissionRate') }}</b-link> {{ falseOmissionRate.times(100).toPrecision(3) }} %
         </b-col>
       </b-row>
       <b-row>
@@ -105,40 +115,42 @@
 
       <b-row>
         <b-col>
-          {{ $t('falsePositiveRate') }} {{ falsePositiveRate.times(100).toPrecision(3) }} %
+          {{ $t('sensitivityInSeries') }} {{ sensitivityInSeries.times(100).toPrecision(3) }} %
         </b-col>
         <b-col>
-          {{ $t('falseNegativeRate') }} {{ falseNegativeRate.times(100).toPrecision(3) }} %
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col>
-          {{ $t('sensitivityInSeries') }} {{ sensitivityInSeries.toPrecision(6) }}
-        </b-col>
-        <b-col>
-          {{ $t('specificityInSeries') }} {{ specificityInSeries.toPrecision(6) }}
+          {{ $t('specificityInSeries') }} {{ specificityInSeries.times(100).toPrecision(3) }} %
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          {{ $t('truePositiveShare') }} {{ truePositiveShare }}
+          {{ $t('truePositiveShare') }} {{ truePositiveShare.times(100).toPrecision(3) }} %
         </b-col>
         <b-col>
-          {{ $t('trueNegativeShare') }} {{ trueNegativeShare }}
-        </b-col>
-        <b-col>
-          {{ $t('falsePositiveShare') }} {{ falsePositiveShare }}
-        </b-col>
-        <b-col>
-          {{ $t('falseNegativeShare') }} {{ falseNegativeShare }}
+          {{ $t('trueNegativeShare') }} {{ trueNegativeShare.times(100).toPrecision(3) }} %
         </b-col>
       </b-row>
       <b-row>
         <b-col>
-          {{ $t('totalPositive') }} {{ totalPositive }}
+          {{ $t('falsePositiveShare') }} {{ falsePositiveShare.times(100).toPrecision(3) }} %
         </b-col>
         <b-col>
-          {{ $t('totalNegative') }} {{ totalNegative }}
+          {{ $t('falseNegativeShare') }} {{ falseNegativeShare.times(100).toPrecision(3) }} %
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          {{ $t('predictedPositiveCount') }} {{ predictedPositiveCount }}
+        </b-col>
+        <b-col>
+          {{ $t('predictedNegativeCount') }} {{ predictedNegativeCount }}
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col>
+          {{ $t('predictedPositiveShare') }} {{ predictedPositiveShare.times(100).toPrecision(3) }} %
+        </b-col>
+        <b-col>
+          {{ $t('predictedNegativeShare') }} {{ predictedNegativeShare.times(100).toPrecision(3) }} %
         </b-col>
       </b-row>
 
@@ -171,16 +183,18 @@ const messages = {
     'trueNegative': 'True negative count',
     'falsePositive': 'False positive count',
     'falseNegative': 'True negative count',
-    'falsePositiveRate': 'False positive rate',
-    'falseNegativeRate': 'False negative rate',
+    'falseDiscoveryRate': 'False discovery rate',
+    'falseOmissionRate': 'False omission rate',
     'sensitivityInSeries': 'Sensitivity in test series',
     'specificityInSeries': 'Specificity in test series',
     'truePositiveShare': 'True positive share',
     'trueNegativeShare': 'True negative share',
     'falsePositiveShare': 'False positive share',
     'falseNegativeShare': 'True negative share',
-    'totalPositive': 'Total positive test results',
-    'totalNegative': 'Total negative test results',
+    'predictedPositiveCount': 'Total positive tests',
+    'predictedNegativeCount': 'Total negative tests',
+    'predictedPositiveShare': 'Positive tests share',
+    'predictedNegativeShare': 'Negative tests share',
     'test100': '100% of tests',
 
   },
@@ -194,21 +208,23 @@ const messages = {
     'requirePositiveTestCount': 'Минимальное число положительных тестов для подтверждения заболевания',
     'accuracy': 'Точность',
     'precision': 'Прогностическая ценность положительного результата',
-    'NPV': 'прогностическая ценность отрицательного результата',
+    'NPV': 'Прогностическая ценность отрицательного результата',
     'truePositive': 'Истинно положительные',
     'trueNegative': 'Истинно отрицательные',
     'falsePositive': 'Ложно положительные',
     'falseNegative': 'Ложно отрицательные',
-    'falsePositiveRate': 'False positive rate',
-    'falseNegativeRate': 'False negative rate',
+    'falseDiscoveryRate': 'Доля ложного обнаружения',
+    'falseOmissionRate': 'Доля ложного исключения',
     'sensitivityInSeries': 'Чувствительность в серии тестов',
     'specificityInSeries': 'Специфичность в серии тестов',
     'truePositiveShare': 'Доля истинно положительных',
     'trueNegativeShare': 'Доля истинно отрицательных',
     'falsePositiveShare': 'Доля ложно положительных',
     'falseNegativeShare': 'Доля ложно отрицательных',
-    'totalPositive': 'Общее количество положительных тестов (серий тестов)',
-    'totalNegative': 'Общее количество отрицательных тестов (серий тестов)',
+    'predictedPositiveCount': 'Общее количество положительных тестов (серий тестов)',
+    'predictedNegativeCount': 'Общее количество отрицательных тестов (серий тестов)',
+    'predictedPositiveShare': 'Доля положительных тестов (серий тестов)',
+    'predictedNegativeShare': 'Доля отрицательных тестов (серий тестов)',
     'test100': '100% тестов',
   }
 }
@@ -341,28 +357,34 @@ export default {
       return new BigNumber(this.trueNegative / (this.trueNegative + this.falseNegative));
     },
     truePositiveShare() {
-      return this.truePositive / this.total;
+      return new BigNumber(this.truePositive / this.total);
     },
     trueNegativeShare() {
-      return this.trueNegative / this.total;
+      return new BigNumber(this.trueNegative / this.total);
     },
     falsePositiveShare() {
-      return this.falsePositive / this.total;
+      return new BigNumber(this.falsePositive / this.total);
     },
     falseNegativeShare() {
-      return this.falseNegative / this.total;
+      return new BigNumber(this.falseNegative / this.total);
     },
-    totalPositive() {
+    predictedPositiveCount() {
       return this.truePositive + this.falsePositive;
     },
-    totalNegative() {
+    predictedNegativeCount() {
       return this.trueNegative + this.falseNegative;
     },
-    falsePositiveRate() {
-      return new BigNumber(this.falsePositive / this.totalPositive);
+    falseDiscoveryRate() {
+      return new BigNumber(this.falsePositive / this.predictedPositiveCount);
     },
-    falseNegativeRate() {
-      return new BigNumber(this.falseNegative / this.totalNegative);
+    falseOmissionRate() {
+      return new BigNumber(this.falseNegative / this.predictedNegativeCount);
+    },
+    predictedPositiveShare() {
+      return new BigNumber(this.predictedPositiveCount / this.total);
+    },
+    predictedNegativeShare() {
+      return new BigNumber(this.predictedNegativeCount / this.total);
     }
   },
   methods: {
